@@ -6,6 +6,13 @@ from queue import LifoQueue, PriorityQueue, Queue
 import threading
 from random import randint
 from time import sleep
+from itertools import zip_longest
+
+from rich.align import Align
+from rich.columns import Columns
+from rich.console import Group
+from rich.live import Live
+from rich.panel import Panel
 
 # Dictionary to map queue names to their respective classes
 QUEUE_TYPES = {
@@ -65,6 +72,7 @@ class Worker(threading.Thread):
         for _ in range(100):
             sleep(delay / 100)
             self.progress += 1
+
 
 # The main() function is the entry point, which receives the parsed arguments supplied by parse_args()
 def main(args):
