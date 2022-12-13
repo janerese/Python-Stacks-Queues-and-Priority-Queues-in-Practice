@@ -9,10 +9,18 @@
 import argparse
 import asyncio
 from collections import Counter
+
+import aiohttp
+
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 
-import aiohttp
+import sys
+from typing import NamedTuple
+
+class Job(NamedTuple):
+    url: str
+    depth: int = 1
 
 async def main(args):
     session = aiohttp.ClientSession()
