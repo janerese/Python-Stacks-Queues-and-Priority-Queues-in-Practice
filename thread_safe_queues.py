@@ -149,6 +149,24 @@ class View:
 # The main() function is the entry point, which receives the parsed arguments supplied by parse_args()
 def main(args):
     buffer = QUEUE_TYPES[args.queue]()
+    # Producer Thread
+    producers = [
+        Producer(args.producer_speed, buffer, PRODUCTS)
+        for _ in range(args.producers)
+    ]
+
+    # Consumer Thread
+    consumers = [
+        Consumer(args.consumer_speed, buffer) for _ in range(args.consumers)
+    ]
+
+    for producer in producers:
+        producer.start()
+
+    for consumer in consumers:
+        consumer.start()
+
+    vieww = View(buffer, producers, consumers)
 
 # The parse_args() supplies parsed arguments to main() function
 def parse_args():
