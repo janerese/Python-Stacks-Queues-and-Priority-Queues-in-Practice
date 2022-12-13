@@ -91,6 +91,16 @@ class Producer(Worker):
             self.buffer.put(self.product)
             self.simulate_idle
 
+# The Consumer class
+# Similar to producer, but even more straightforward
+class Consumer(Worker):
+      def run(self):
+        while True:
+            self.product = self.buffer.get() #  The .get() method is blocking by default, which will keep the consumer thread stopped and waiting until there’s at least one product in the queue
+            self.simulate_work()
+            self.buffer.task_done()
+            self.simulate_idle()
+
 # The View class that defines a view that renders the current state of your producers, consumers, and the queue ten times a second
 class View:
     def __init__(self, buffer, producers, consumers):
