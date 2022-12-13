@@ -55,7 +55,12 @@ class Product:
 
     def __str__(self):
         return self.label
-        
+
+class Priority(IntEnum):
+    HIGH = 1
+    MEDIUM = 2
+    LOW = 3
+    
 # The Worker class is the common base class that encapsulates the attributes and behaviors of producer and consumer
 class Worker(threading.Thread):
     def __init__(self, speed, buffer):
