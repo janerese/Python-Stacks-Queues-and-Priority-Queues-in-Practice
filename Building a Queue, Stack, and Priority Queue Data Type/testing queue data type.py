@@ -2,6 +2,7 @@
 
 from queues import Queue
 
+# Testing 1
 fifo = Queue()
 fifo.enqueue("1st")
 fifo.enqueue("2nd")
@@ -11,6 +12,7 @@ print(fifo.dequeue())
 print(fifo.dequeue())
 print(fifo.dequeue())
 
+# Testing 2
 fifo = Queue("1st", "2nd", "3rd")
 print("Initial length:",len(fifo))
 
