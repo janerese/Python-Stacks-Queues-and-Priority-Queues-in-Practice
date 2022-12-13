@@ -17,6 +17,10 @@ from rich.live import Live
 from rich.panel import Panel
 
 # Added modules for priority queue/heap
+# To represent products, define a data class with a customized string representation and ordering enabled
+from dataclasses import dataclass, field
+# Define an enum class with known priority values and three products with descending priorities from highest to lowest
+from enum import IntEnum
 
 # Dictionary to map queue names to their respective classes
 QUEUE_TYPES = {
@@ -44,6 +48,14 @@ PRODUCTS = (
     ":yo-yo:",
 )
 
+@dataclass(order=True)
+class Product:
+    priority: int
+    label: str = field(compare=False)
+
+    def __str__(self):
+        return self.label
+        
 # The Worker class is the common base class that encapsulates the attributes and behaviors of producer and consumer
 class Worker(threading.Thread):
     def __init__(self, speed, buffer):
