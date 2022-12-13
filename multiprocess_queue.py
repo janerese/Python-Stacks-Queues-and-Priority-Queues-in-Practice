@@ -6,6 +6,25 @@ from hashlib import md5
 from itertools import product
 from string import ascii_lowercase
 
+# To minimize the cost of data serialization between your processes, each worker will produce its own chunk of letter combinations based on the range of indices specified in a dequeued job object
+class Combinations:
+    def __init__(self, alphabet, length):
+        self.alphabet = alphabet
+        self.length = length
+
+    def __len__(self):
+        return len(self.alphabet) ** self.length
+
+    def __getitem__(self, index):
+        if index >= len(self):
+            raise IndexError
+        return "".join(
+            self.alphabet[
+                (index // len(self.alphabet) ** i) % len(self.alphabet)
+            ]
+            for i in reversed(range(self.length))
+    )
+    
 # Defines a function that’ll try to reverse an MD5 hash value provided as the first argument
 def reverse_md5(hash_value, alphabet=ascii_lowercase, max_length=6):
     for length in range(1, max_length + 1):
@@ -31,6 +50,6 @@ def chunk_indices(length, num_chunks):
         yield start, (start := start + chunk_size)
         length -= chunk_size
         num_chunks -= 1
-        
+
 if __name__ == "__main__":
     main()
