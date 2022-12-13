@@ -1,3 +1,6 @@
+# This is has the same code as async_queues.py with one difference
+# This is changed to LIFO Queue from FIFO Queue
+
 # Using Asynchronous Queues
 # Writing a rudimentary web crawler which recursively follows links on a specified website up to a given depth level and counts the number of visits per link
 # To fetch data asynchronously, the popular aiohttp library will be used
@@ -26,7 +29,7 @@ async def main(args):
     session = aiohttp.ClientSession()
     try:
         links = Counter()
-        queue = asyncio.Queue() # Instantiates an asynchronous FIFO queue
+        queue = asyncio.LifoQueue() # Instantiates an asynchronous LIFO queue
         # Create a number of worker coroutines wrapped in asynchronous tasks that start running as soon as possible in the background on the event loop
         tasks = [
             asyncio.create_task(
