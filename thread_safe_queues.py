@@ -3,6 +3,7 @@
 # Necessary modules
 import argparse
 from queue import LifoQueue, PriorityQueue, Queue
+import threading
 
 # Dictionary to map queue names to their respective classes
 QUEUE_TYPES = {
@@ -29,6 +30,16 @@ PRODUCTS = (
     ":thread:",
     ":yo-yo:",
 )
+
+# The Worker class is the common base class that encapsulates the attributes and behaviors of producer and consumer
+class Worker(threading.Thread):
+    def __init__(self, speed, buffer):
+        super().__init__(daemon=True)
+        self.speed = speed
+        self.buffer = buffer
+        self.product = None
+        self.working = False
+        self.progress = 0
 
 # The main() function is the entry point, which receives the parsed arguments supplied by parse_args()
 def main(args):
