@@ -1,4 +1,7 @@
-# Using Python's thread-safe queues
+# This is the same code as thread_safe_queues.py
+# To see the output for the LIFO queue or a STACK, run this script with a LIFO queue
+# Type this command:
+# $ python thread_safe_queues.py --queue lifo
 
 # Necessary modules
 import argparse
