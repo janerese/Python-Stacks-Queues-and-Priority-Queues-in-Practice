@@ -1,6 +1,7 @@
-# Building a Queue Data Type
 from collections import deque # Representing FIFO and LIFO Queues with a Deque
+from heapq import heappop, heappush
 
+# Building a Queue Data Type
 class Queue:
     def __init__(self, *elements):
         self._elements = deque(elements)
@@ -24,3 +25,13 @@ class Stack(Queue): # Extending Queue class using inheritance
         return self._elements.pop()
 
 # Building a PriorityQueue Data Type
+class PriorityQueue:
+    def __init__(self):
+        self._elements = []
+    
+    def enqueue_with_priority(self, priority, value):
+        heappush(self._elements, (priority, value))
+
+    def dequeue(self):
+        return heappop(self._elements)
+        
