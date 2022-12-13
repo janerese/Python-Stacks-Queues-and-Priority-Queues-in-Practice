@@ -82,7 +82,15 @@ class Producer(Worker):
     def __init__(self, speed, buffer, products):
         super().__init__(speed, buffer)
         self.products = products
-        
+
+    # The run() method is where all the magic happens. A producer works in an infinite loop, choosing a random product and simulating some work before putting that product onto the queue, called a buffer. It then goes to sleep for a random period, and when it wakes up again, the process repeats
+    def run(self):
+        while True:
+            self.product = choice(self.products)
+            self.simulate_work()
+            self.buffer.put(self.product)
+            self.simulate_idle
+
 # The View class that defines a view that renders the current state of your producers, consumers, and the queue ten times a second
 class View:
     def __init__(self, buffer, producers, consumers):
