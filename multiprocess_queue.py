@@ -5,6 +5,7 @@ import time
 from hashlib import md5
 from string import ascii_lowercase
 import multiprocessing
+from dataclasses import dataclass
 
 # To minimize the cost of data serialization between your processes, each worker will produce its own chunk of letter combinations based on the range of indices specified in a dequeued job object
 class Combinations:
@@ -24,6 +25,20 @@ class Combinations:
             ]
             for i in reversed(range(self.length))
     )
+
+# Job class that Python will serialize and place on the input queue for worker processes to consume
+@dataclass(frozen=True)
+class Job:
+    combinations: Combinations
+    start_index: int
+    stop_index: int
+
+    def __call__(self, hash_value):
+        for index in range(self.start_index, self.stop_index):
+            text_bytes = self.combinations[index].encode("utf-8")
+            hashed = md5(text_bytes).hexdigest()
+            if hashed == hash_value:
+                return text_bytes.decode("utf-8")
 
 class Worker(multiprocessing.Process):
     def __init__(self, queue_in, queue_out, hash_value):
