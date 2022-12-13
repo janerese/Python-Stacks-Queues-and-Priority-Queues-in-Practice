@@ -1,4 +1,5 @@
 # Integrating Python With Distributed Message Queues
+# This is what a rudimentary producer can look like
 
 import pika
 
