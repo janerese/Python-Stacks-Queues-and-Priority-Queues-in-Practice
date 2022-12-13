@@ -4,6 +4,8 @@
 import argparse
 from queue import LifoQueue, PriorityQueue, Queue
 import threading
+from random import randint
+from time import sleep
 
 # Dictionary to map queue names to their respective classes
 QUEUE_TYPES = {
@@ -40,6 +42,13 @@ class Worker(threading.Thread):
         self.product = None
         self.working = False
         self.progress = 0
+
+    @property
+    # The state() function to check the state of a worker thread
+    def state(self):
+        if self.working:
+            return f"{self.product} ({self.progress}%)"
+        return ":zzz Idle"
 
 # The main() function is the entry point, which receives the parsed arguments supplied by parse_args()
 def main(args):
