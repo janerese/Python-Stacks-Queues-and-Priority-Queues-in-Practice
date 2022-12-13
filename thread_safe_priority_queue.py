@@ -176,6 +176,14 @@ class View:
 # The main() function is the entry point, which receives the parsed arguments supplied by parse_args()
 def main(args):
     buffer = QUEUE_TYPES[args.queue]()
+
+    # Adjustments 
+    products = PRIORITIZED_PRODUCTS if args.queue == "heap" else PRODUCTS
+    producers = [
+        Producer(args.producer_speed, buffer, products)
+        for _ in range(args.producers)
+    ]
+
     # Producer Thread
     producers = [
         Producer(args.producer_speed, buffer, PRODUCTS)
