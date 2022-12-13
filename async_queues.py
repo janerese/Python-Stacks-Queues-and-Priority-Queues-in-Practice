@@ -1,3 +1,5 @@
+# This is FIFO Queue
+
 # Using Asynchronous Queues
 # Writing a rudimentary web crawler which recursively follows links on a specified website up to a given depth level and counts the number of visits per link
 # To fetch data asynchronously, the popular aiohttp library will be used
@@ -26,7 +28,8 @@ async def main(args):
     session = aiohttp.ClientSession()
     try:
         links = Counter()
-        queue = asyncio.Queue()
+        queue = asyncio.Queue() # Instantiates an asynchronous FIFO queue
+        # Create a number of worker coroutines wrapped in asynchronous tasks that start running as soon as possible in the background on the event loop
         tasks = [
             asyncio.create_task(
                 worker(
@@ -40,9 +43,10 @@ async def main(args):
             for i in range(args.num_workers)
         ]
 
-        await queue.put(Job(args.url))
-        await queue.join()
+        await queue.put(Job(args.url)) # Puts the first job in the queue, which kicks off the crawling
+        await queue.join() # Causes the main coroutine to wait until the queue has been drained and there are no more jobs to perform
 
+        # Do a graceful cleanup when the background tasks are no longer needed
         for task in tasks:
             task.cancel()
         
