@@ -7,6 +7,7 @@ import threading
 from random import randint
 from time import sleep
 from itertools import zip_longest
+from random import choice, randint
 
 from rich.align import Align
 from rich.columns import Columns
@@ -76,6 +77,12 @@ class Worker(threading.Thread):
             sleep(delay / 100)
             self.progress += 1
 
+# The Producer class
+class Producer(Worker):
+    def __init__(self, speed, buffer, products):
+        super().__init__(speed, buffer)
+        self.products = products
+        
 # The View class that defines a view that renders the current state of your producers, consumers, and the queue ten times a second
 class View:
     def __init__(self, buffer, producers, consumers):
