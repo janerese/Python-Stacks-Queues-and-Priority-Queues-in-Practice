@@ -3,7 +3,6 @@
 # Necessary modules
 import time
 from hashlib import md5
-from itertools import product
 from string import ascii_lowercase
 
 # To minimize the cost of data serialization between your processes, each worker will produce its own chunk of letter combinations based on the range of indices specified in a dequeued job object
