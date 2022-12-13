@@ -50,6 +50,13 @@ class Worker(threading.Thread):
             return f"{self.product} ({self.progress}%)"
         return ":zzz Idle"
 
+    # The stimulate_idle() function to stimulate idle time
+    def stimulate_idle(self):
+        self.product = None
+        self.working = False
+        self.progress = 0
+        sleep(randint(1,3))
+        
 # The main() function is the entry point, which receives the parsed arguments supplied by parse_args()
 def main(args):
     buffer = QUEUE_TYPES[args.queue]()
