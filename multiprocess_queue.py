@@ -10,6 +10,9 @@ import argparse
 import queue
 import time
 
+# Killing a Worker with the Poison Pill
+POISON_PILL = None
+
 # To minimize the cost of data serialization between your processes, each worker will produce its own chunk of letter combinations based on the range of indices specified in a dequeued job object
 class Combinations:
     def __init__(self, alphabet, length):
@@ -53,6 +56,9 @@ class Worker(multiprocessing.Process):
     def run(self):
         while True:
             job = self.queue_in.get()
+            if job is POISON_PILL:
+                self.queue_in.put(POISON_PILL)
+                break
             if plaintext := job(self.hash_value):
                 self.queue_out.put(plaintext)
                 break
