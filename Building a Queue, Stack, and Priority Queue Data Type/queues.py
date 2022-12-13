@@ -21,6 +21,6 @@ class Queue:
 # Building a Stack Data Type
 class Stack(Queue): # Extending Queue class using inheritance
     def dequeue(self): # Overriding the .dequeue method
-        return self._element.pop()
+        return self._elements.pop()
 
 # Building a PriorityQueue Data Type
