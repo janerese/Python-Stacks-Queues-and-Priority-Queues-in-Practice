@@ -5,3 +5,9 @@
 # To install both libraries, type this command:
 # $ python -m pip install aiohttp beautifulsoup4
 
+# Necessary modules
+import argparse
+import asyncio
+from collections import Counter
+
+import aiohttp
