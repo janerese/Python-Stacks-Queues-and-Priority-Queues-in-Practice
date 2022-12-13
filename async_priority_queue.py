@@ -1,5 +1,5 @@
-# This is has the same code as async_queues.py with one difference
-# This is changed to LIFO Queue from FIFO Queue
+# This is has the same code as async_queues.py with several adjustments
+# This is changed to Priority Queue from FIFO Queue
 
 # Using Asynchronous Queues
 # Writing a rudimentary web crawler which recursively follows links on a specified website up to a given depth level and counts the number of visits per link
@@ -25,11 +25,15 @@ class Job(NamedTuple):
     url: str
     depth: int = 1
 
+    def __lt__(self, other):
+        if isinstance(other, Job):
+            return len(self.url) < len(other.url)
+
 async def main(args):
     session = aiohttp.ClientSession()
     try:
         links = Counter()
-        queue = asyncio.LifoQueue() # Instantiates an asynchronous LIFO queue
+        queue = asyncio.PriorityQueue() # Instantiates an asynchronous Priority Queue
         # Create a number of worker coroutines wrapped in asynchronous tasks that start running as soon as possible in the background on the event loop
         tasks = [
             asyncio.create_task(
