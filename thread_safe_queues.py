@@ -52,20 +52,23 @@ class Worker(threading.Thread):
 
     @property
     # The state() function to check the state of a worker thread
+    # The state property returns a string with either the product’s name and the progress of work or a generic message indicating that the worker is currently idle
     def state(self):
         if self.working:
             return f"{self.product} ({self.progress}%)"
         return ":zzz Idle"
 
-    # The stimulate_idle() function to stimulate idle time
-    def stimulate_idle(self):
+    # The simulate_idle() function to stimulate idle time
+    #The simulate_idle() method resets the state of a worker thread and goes to sleep for a few randomly chosen seconds
+    def simulate_idle(self):
         self.product = None
         self.working = False
         self.progress = 0
         sleep(randint(1,3))
     
-    # The stimulate_work() function to stimulate work time
-    def stimulate_work(self):
+    # The simulate_work() function to stimulate work time
+    # The simulate_work() picks a random delay in seconds adjusted to the worker’s speed and progresses through the work
+    def simulate_work(self):
         self.working = True
         self.progress = 0
         delay = randint(1, 1 + 15 // self.speed)
@@ -73,6 +76,11 @@ class Worker(threading.Thread):
             sleep(delay / 100)
             self.progress += 1
 
+class View:
+    def __init__(self, buffer, producers, consumers):
+        self.buffer = buffer
+        self.producers = producers
+        self.consumers = consumers
 
 # The main() function is the entry point, which receives the parsed arguments supplied by parse_args()
 def main(args):
