@@ -1,5 +1,8 @@
 # This is the same code as thread_safe_queues.py but with adjustments
 # These adjusments are made to use a synchronized priority queue or a heap
+# # To see the output for the Priority Queue or a HEAP, run this script with a HEAP queue
+# Type this command:
+# $ python thread_safe_queues.py --queue heap
 
 # Necessary modules
 import argparse
