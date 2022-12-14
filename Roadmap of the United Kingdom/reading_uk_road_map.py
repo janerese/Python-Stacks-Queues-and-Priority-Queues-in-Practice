@@ -7,6 +7,7 @@ from graph import (
     breadth_first_traverse,
     breadth_first_search as bfs,
     shortest_path,
+    connected
 )
 
 nodes, graph = load_graph("roadmap.dot", City.from_dict)
@@ -94,3 +95,8 @@ print(" → ".join(
     city.name
     for city in shortest_path(graph, city1, city2, by_latitude)
 ))
+
+# Testing the breadth-first travelsal implementation of whther two nodes remain connected or not
+print(connected(graph, nodes["belfast"], nodes["glasgow"]))
+
+print(connected(graph, nodes["belfast"], nodes["derry"]))
