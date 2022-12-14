@@ -51,3 +51,22 @@ def breadth_first_search(graph, source, predicate):
     for node in breadth_first_traverse(graph, source):
         if predicate(node):
             return node
+
+# One possible solution for allowing sorting the neighbors in a particular order
+def breadth_first_traverse(graph, source, order_by=None):
+    queue = Queue(source)
+    visited = {source}
+    while queue:
+        yield (node := queue.dequeue())
+        neighbors = list(graph.neighbors(node))
+        if order_by:
+            neighbors.sort(key=order_by)
+        for neighbor in neighbors:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.enqueue(neighbor)
+
+def breadth_first_search(graph, source, predicate, order_by=None):
+    for node in breadth_first_traverse(graph, source, order_by):
+        if predicate(node):
+            return node   
