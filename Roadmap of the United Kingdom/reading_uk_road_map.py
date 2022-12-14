@@ -1,6 +1,7 @@
 # Reading the DOT file (the UK road map) with the graph data type
 
 from graph import City, load_graph
+import networkx as nx
 
 nodes, graph = load_graph("roadmap.dot", City.from_dict)
 
@@ -25,4 +26,16 @@ def by_distance(weights):
 for neighbor, weights in sort_by(graph[nodes["london"]], by_distance):
     print(f"{weights['distance']:>3} miles, {neighbor.name}")
 
+# Calling the nx.bfs_tree() function on your graph to reveal the breadth-first order of traversal
+def is_twentieth_century(year):
+    return year and 1901 <= year <= 2000
+
+nodes, graph = load_graph("roadmap.dot", City.from_dict)
+for node in nx.bfs_tree(graph, nodes["edinburgh"]):
+    print("📍", node.name)
+    if is_twentieth_century(node.year):
+        print("Found:", node.name, node.year)
+        break
+else:
+    print("Not found")
     
