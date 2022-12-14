@@ -69,10 +69,14 @@ def breadth_first_traverse(graph, source, order_by=None):
                 visited.add(neighbor)
                 queue.enqueue(neighbor)
 
+# def breadth_first_search(graph, source, predicate, order_by=None):
+#     for node in breadth_first_traverse(graph, source, order_by):
+#         if predicate(node):
+#             return node
+
+# Refactor
 def breadth_first_search(graph, source, predicate, order_by=None):
-    for node in breadth_first_traverse(graph, source, order_by):
-        if predicate(node):
-            return node
+    return search(breadth_first_traverse, graph, source, predicate, order_by)
 
 # This new function takes another node as an argument and optionally lets you order the neighbors using a custom strategy
 # It also defines an empty dictionary, which you populate when visiting a neighbor by associating it with the previous node on your path
@@ -141,3 +145,5 @@ def recursive_depth_first_traverse(graph, source, order_by=None):
                 yield from visit(neighbor)
 
     return visit(source)
+
+# 
