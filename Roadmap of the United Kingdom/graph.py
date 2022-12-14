@@ -54,6 +54,7 @@ def load_graph(filename, node_factory):
 #         if predicate(node):
 #             return node
 
+# Shortest Path Using Breadth-First Traversal
 # One possible solution for allowing sorting the neighbors in a particular order
 def breadth_first_traverse(graph, source, order_by=None):
     queue = Queue(source)

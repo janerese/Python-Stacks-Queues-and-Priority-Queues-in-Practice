@@ -100,3 +100,16 @@ print(" → ".join(
 print(connected(graph, nodes["belfast"], nodes["glasgow"]))
 
 print(connected(graph, nodes["belfast"], nodes["derry"]))
+
+# Depth-First Search using a LIFO Queue
+def is_twentieth_century(year):
+    return year and 1901 <= year <= 2000
+
+nodes, graph = load_graph("roadmap.dot", City.from_dict)
+for node in nx.dfs_tree(graph, nodes["edinburgh"]):
+    print("📍", node.name)
+    if is_twentieth_century(node.year):
+        print("Found:", node.name, node.year)
+        break
+else:
+    print("Not found")
