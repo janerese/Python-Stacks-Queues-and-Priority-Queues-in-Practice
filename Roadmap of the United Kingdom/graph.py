@@ -4,6 +4,7 @@
 from typing import NamedTuple
 import networkx as nx
 from queues import Queue
+from collections import deque
 
 # Extend a named tuple to ensure that node objects are hashable, which is required by networkx
 class City(NamedTuple):
@@ -91,3 +92,17 @@ def shortest_path(graph, source, destination, order_by=None):
                 previous[neighbor] = node
                 if neighbor == destination:
                     return retrace(previous, source, destination)
+
+# To recreate the shortest path between your source and destination, you can iteratively look up the dictionary built earlier when you traversed the graph with the breadth-first approach
+def retrace(previous, source, destination):
+    path = deque()
+
+    current = destination
+    while current != source:
+        path.appendleft(current)
+        current = previous.get(current)
+        if current is None:
+            return None
+
+    path.appendleft(source)
+    return list(path)
