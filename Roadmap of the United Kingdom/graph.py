@@ -3,6 +3,7 @@
 # Necessary modues
 from typing import NamedTuple
 import networkx as nx
+from queues import Queue
 
 # Extend a named tuple to ensure that node objects are hashable, which is required by networkx
 class City(NamedTuple):
