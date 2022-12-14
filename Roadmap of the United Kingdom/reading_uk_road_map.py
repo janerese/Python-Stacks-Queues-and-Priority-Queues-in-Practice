@@ -7,7 +7,9 @@ from graph import (
     breadth_first_traverse,
     breadth_first_search as bfs,
     shortest_path,
-    connected
+    connected,
+    depth_first_traverse,
+    depth_first_search as dfs
 )
 
 nodes, graph = load_graph("roadmap.dot", City.from_dict)
@@ -113,3 +115,15 @@ for node in nx.dfs_tree(graph, nodes["edinburgh"]):
         break
 else:
     print("Not found")
+
+# Testing the breadth_first_search() and depth_first_search() functions call search() with the corresponding traversal strategy
+def is_twentieth_century(city):
+    return city.year and 1901 <= city.year <= 2000
+
+nodes, graph = load_graph("roadmap.dot", City.from_dict)
+city = dfs(graph, nodes["edinburgh"], is_twentieth_century)
+city.name
+
+
+for city in depth_first_traverse(graph, nodes["edinburgh"]):
+    print(city.name)
