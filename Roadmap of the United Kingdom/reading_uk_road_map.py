@@ -1,7 +1,12 @@
 # Reading the DOT file (the UK road map) with the graph data type
 
-from graph import City, load_graph
 import networkx as nx
+from graph import (
+    City,
+    load_graph,
+    breadth_first_traverse,
+    breadth_first_search as bfs,
+)
 
 nodes, graph = load_graph("roadmap.dot", City.from_dict)
 
