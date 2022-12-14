@@ -71,6 +71,7 @@ city.name
 for city in breadth_first_traverse(graph, nodes["edinburgh"]):
     print(city.name)
 
+# Shortest Path Using Breadth-First Traversal
 # Revealing the shortest path between two cities
 nodes, graph = load_graph("roadmap.dot", City.from_dict)
 
@@ -81,6 +82,7 @@ for i, path in enumerate(nx.all_shortest_paths(graph, city1, city2), 1):
     print(f"{i}.", " → ".join(city.name for city in path))
 
 
+# Queue-based implementation of the shortest path
 # When you call the queue-based implementation of the shortest path, you get the same results as with networkx
 print(" → ".join(city.name for city in shortest_path(graph, city1, city2)))
 
