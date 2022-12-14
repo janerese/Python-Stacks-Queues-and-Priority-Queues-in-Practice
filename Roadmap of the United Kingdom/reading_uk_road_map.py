@@ -6,6 +6,7 @@ from graph import (
     load_graph,
     breadth_first_traverse,
     breadth_first_search as bfs,
+    shortest_path,
 )
 
 nodes, graph = load_graph("roadmap.dot", City.from_dict)
@@ -78,3 +79,16 @@ city2 = nodes["perth"]
 
 for i, path in enumerate(nx.all_shortest_paths(graph, city1, city2), 1):
     print(f"{i}.", " → ".join(city.name for city in path))
+
+
+# When you call the queue-based implementation of the shortest path, you get the same results as with networkx
+print(" → ".join(city.name for city in shortest_path(graph, city1, city2)))
+
+
+def by_latitude(city):
+    return -city.latitude
+
+print(" → ".join(
+    city.name
+    for city in shortest_path(graph, city1, city2, by_latitude)
+))
