@@ -1,7 +1,7 @@
 # This is the same code as thread_safe_queues.py
 # To see the output for the LIFO queue or a STACK, run this script with a LIFO queue
 # Type this command:
-# $ python thread_safe_queues.py --queue lifo
+# $ python thread_safe_lifo_queue.py --queue lifo
 
 # Necessary modules
 import argparse
@@ -60,7 +60,7 @@ class Worker(threading.Thread):
     def state(self):
         if self.working:
             return f"{self.product} ({self.progress}%)"
-        return ":zzz Idle"
+        return ":zzz: Idle"
 
     # The simulate_idle() function to stimulate idle time
     #The simulate_idle() method resets the state of a worker thread and goes to sleep for a few randomly chosen seconds

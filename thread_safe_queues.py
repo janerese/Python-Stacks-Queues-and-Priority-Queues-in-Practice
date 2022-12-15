@@ -57,7 +57,7 @@ class Worker(threading.Thread):
     def state(self):
         if self.working:
             return f"{self.product} ({self.progress}%)"
-        return ":zzz Idle"
+        return ":zzz: Idle"
 
     # The simulate_idle() function to stimulate idle time
     #The simulate_idle() method resets the state of a worker thread and goes to sleep for a few randomly chosen seconds

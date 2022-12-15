@@ -2,7 +2,7 @@
 # These adjusments are made to use a synchronized priority queue or a heap
 # # To see the output for the Priority Queue or a HEAP, run this script with a HEAP queue
 # Type this command:
-# $ python thread_safe_queues.py --queue heap
+# $ python thread_safe_priority_queue.py --queue heap
 
 # Necessary modules
 import argparse
@@ -32,21 +32,9 @@ QUEUE_TYPES = {
 
 # Defining the products that producers will pick at random and pretend to be working on
 PRODUCTS = (
-    ":balloon:",
-    ":cookie:",
-    ":crystal_ball:",
-    ":diving_mask:",
-    ":flashlight:",
-    ":gem:",
-    ":gift:",
-    ":kite:",
-    ":party_popper:",
-    ":postal_horn:",
-    ":ribbon:",
-    ":rocket:",
-    ":teddy_bear:",
-    ":thread:",
-    ":yo-yo:",
+    ":1st_place_medal:",
+    ":2nd_place_medal:",
+    ":3rd_place_medal:"
 )
 
 # Adjustments in the code to use a sychronized priority queue / heap
@@ -66,7 +54,7 @@ class Priority(IntEnum):
     LOW = 3
 
 PRIORITIZED_PRODUCTS = (
-    Product(Priority.HIGH, "1st_pace_medal:"),
+    Product(Priority.HIGH, ":1st_place_medal:"),
     Product(Priority.MEDIUM, ":2nd_place_medal:"),
     Product(Priority.LOW, ":3rd_place_medal:"),
 )
@@ -87,7 +75,7 @@ class Worker(threading.Thread):
     def state(self):
         if self.working:
             return f"{self.product} ({self.progress}%)"
-        return ":zzz Idle"
+        return ":zzz: Idle"
 
     # The simulate_idle() function to stimulate idle time
     #The simulate_idle() method resets the state of a worker thread and goes to sleep for a few randomly chosen seconds
