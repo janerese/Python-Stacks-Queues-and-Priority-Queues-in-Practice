@@ -58,7 +58,7 @@ else:
     print("Not found")
 
 # To ensure consistent resutls, sort the neighbors according to some criteria
-print("6th testing: Visit cities with a higher latitude first")
+print("\n6th testing: Visit cities with a higher latitude first")
 def order(neighbors):
     def by_latitude(city):
         return city.latitude
