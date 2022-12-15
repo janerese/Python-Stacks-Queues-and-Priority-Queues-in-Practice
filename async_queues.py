@@ -6,6 +6,9 @@
 # To parse HTML hyperlinks, beautifulsoup4 will be used
 # To install both libraries, type this command:
 # $ python -m pip install aiohttp beautifulsoup4
+# To run your script, type this command:
+# $ python async_queues.py https://www.python.org/ --max-depth 2 \
+#                                                 --num-workers 3
 
 # Necessary modules
 import argparse
